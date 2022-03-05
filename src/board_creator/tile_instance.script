@@ -1,0 +1,75 @@
+local td = --[[length of 1 tile--]]
+
+function move_tile(dir)
+	local p = go.get_position()
+	if dir == "left" and self.left then
+		p.x = p.x - td
+	elseif dir == "right" and self.right then
+		p.x = p.x + td
+	elseif dir == "up" and self.up then
+		p.y = p.y + td
+	elseif dir == "down" and self.down then
+		p.y = p.y - td
+	end
+	go.set_position(p)
+end
+
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	local p = go.get_position()
+	if p.x == td / 2 then
+		self.left = false
+		self.right = true
+	elseif p.x == (td * 8) - (td / 2) then
+		self.right = false
+		self.left = true
+	else
+		self.left = true
+		self.right = true
+	end
+	if p.y == (td * 8) - (td / 2) then
+		self.up = false
+		self.down = true
+	elseif p.y == td / 2 then
+		self.down = false
+		self.up = true
+	else
+		self.up = true
+		self.down = true
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("move") then
+		move_tile(message.dir)
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
