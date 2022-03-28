@@ -1,23 +1,38 @@
+function generate_board()
+	local board = {}
+	for i = 1, 8 do
+		board[i] = {}
+		for j = 1, 8 do
+			local num = rnd.range(1, 6)
+			board[i][j] = tiles[num]
+		end
+	end
+	return board
+end
+
 function init(self)
-        
+	
 end
 
 function final(self)
-        
+	
 end
 
 function update(self, dt)
-        
+	
 end
 
-function on_message(self)
-        
+function on_message(self, message_id, message, sender)
+	if message_id == hash("generate_board") then
+		local board = generate_board()
+		msg.post(sender, "random_board", {board = board})
+	end
 end
 
-function on_input(self)
-        
+function on_input(self, action_id, action)
+	
 end
 
 function on_reload(self)
-        
+	
 end
