@@ -1,0 +1,23 @@
+function init(self)
+        
+end
+
+function final(self)
+        
+end
+
+function update(self, dt)
+        
+end
+
+function on_message(self)
+        
+end
+
+function on_input(self)
+        
+end
+
+function on_reload(self)
+        
+end
